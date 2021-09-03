@@ -29,31 +29,13 @@ function bankDeposit(array $account, $value): array
     return $account;
 }
 
-$contas_w_key = [
-    '123.456.789-10'=> [
-        "titular" => "ana",
-        "saldo"=>123
-    ],
-    '123.456.789-11'=>[
-        "titular" => "lui",
-        "saldo"=>321
-    ],
-    '123.256.789-12'=>[
-        "titular" => "may",
-        "saldo"=>18567
-    ]
-];
+// function deleteAccount($contas_w_key array &$account)
+// {
+//     $contas_w_key = unset($account);
+// }
 
-
-$contas_w_key['123.456.789-10'] = bankDraft($contas_w_key['123.456.789-10'] , 3);
-
-$contas_w_key['123.456.789-11'] = bankDeposit($contas_w_key['123.456.789-11'] , 30000.546);
-
-
-foreach($contas_w_key as $cpf=>$account){
-
-    showMessage($cpf.": ".$account['titular']." ".$account['saldo']);
-
+// PASSAGEM POR REFERÊNCIA:& modifica o dado em memória e não uma cópia dele
+function upperLetters(array &$account)
+{
+    $account['titular'] = mb_strtoupper($account['titular']);
 }
-
-

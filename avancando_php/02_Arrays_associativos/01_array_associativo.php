@@ -54,8 +54,8 @@ $contas_w_key[456987]=[
 ];
 
 // ADICIONANDO VALORES AO FINAL DO ARRAY
-Lu ficou com o numero de cpf em uma unidade maior do que o maior numero de cpf do array
-até então
+// Lu ficou com o numero de cpf em uma unidade maior do que o maior numero de cpf do array
+// até então
 $contas_w_key[]=[
     'titular' => 'Lu',
     'saldo' =>103333

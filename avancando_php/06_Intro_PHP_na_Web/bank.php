@@ -43,12 +43,13 @@ upperLetters($contas_w_key['123.256.789-12']);
 </head>
     <body>
         <h1>Bank accounts</h1>
-    <?php foreach($contas_w_key as $cpf=> $account){ ?>
+    <?php foreach($contas_w_key as $cpf=> $account){ 
+        ['titular'=>$var_titular, 'saldo'=>$var_saldo] = $account; ?>
         <dt>
-            <h3> Tilular:<?=  $account['titular']; ?> - CPF:<?= $cpf?> </h3>
+            <h3> Tilular:<?=  $var_titular; ?> - CPF:<?= $cpf?> </h3>
         </dt>
         <dd>
-            Saldo:<?=  $account['saldo']; ?>
+            Saldo:<?=  $var_saldo; ?>
         </dd>
     <?php } ?>    
     

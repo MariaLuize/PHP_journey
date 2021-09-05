@@ -1,9 +1,12 @@
 <?php
 
 function showMessage(string $message){
-    echo $message.PHP_EOL;
+    echo $message.'<br>'; //quebrade linha html
 }
-
+function showAccount(array $account)
+{
+    echo "<li> Titular: $account[titular] Saldo: {$account['saldo']} </li>";
+}
 /* Explicitar os tipos dos parâmetros 
     Também devemos nos atentar ao fato de a $conta precisa ser do tipo array, e teremos um erro se for passado qualquer outro tipo:
     Sempre podemos informar na função o tipo de dado que queremos receber. Além disso, podemos informar também o tipo de dado sendo retornado. 

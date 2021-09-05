@@ -1,4 +1,4 @@
-<<?php
+<?php
  
 require_once 'funcoes.php';
 
@@ -30,9 +30,29 @@ unset($contas_w_key['123.256.719-02']);
 
 // PASSAGEM POR REFERÊNCIA
 upperLetters($contas_w_key['123.256.789-12']);
+?>
 
-foreach($contas_w_key as $cpf=>$account){
-    ['titular'=>$var_titular, 'saldo'=>$var_saldo] = $account;
-    showMessage("$cpf: {$account['titular']} {$account['saldo']}");
-    // showMessage("$cpf: $var_titular $var_saldo");
-}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <body>
+        <h1>Bank accounts</h1>
+    <?php foreach($contas_w_key as $cpf=> $account){ ?>
+        <dt>
+            <h3> Tilular:<?=  $account['titular']; ?> - CPF:<?= $cpf?> </h3>
+        </dt>
+        <dd>
+            Saldo:<?=  $account['saldo']; ?>
+        </dd>
+    <?php } ?>    
+    
+
+
+    </body>
+</html>

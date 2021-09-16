@@ -5,8 +5,9 @@ require_once 'src/Address.php';
 require_once 'src/AccountHolder.php';
 require_once 'src/CPF.php';
 
+$cpf            = new CPF('645.616.546-41');
 $address        = new Address('BEL','sacramenta','alferes', '330');
-$primeiraConta  = new Account(new AccountHolder(new CPF('645.616.546-41'), 'Nataniela Maria', $address));
+$primeiraConta  = new Account(new AccountHolder($cpf, 'Nataniela Maria', $address));
 $primeiraConta->deposita(500);
 var_dump($primeiraConta);
 

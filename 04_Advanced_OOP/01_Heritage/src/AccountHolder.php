@@ -7,15 +7,17 @@ class AccountHolder extends Person
 {
     private Address $addressClass;
 
-    public function __construct(CPF $cpfClass, string $name, Address $addressClass)
+    public function __construct(CPF $cpf, string $name, Address $addressClass)
     {
-        $this->cpfClass = $cpfClass;
-        $this->validationName($name);
-        $this->name = $name;
+        /*  CHAMANDO O CONSTRUTOR DA CLASSE BASE(CHAMADA DE parent PELO PHP) que se refere à classe mãe daquela que está fazendo a execução, 
+            O QUE NESSE CASO É A CLASSE PERSON */
+        parent::__construct($name, $cpf);
         $this->addressClass = $addressClass;
     }
 
     // Access methods
+
+    // No caso de retornar um objeto inteiro da classe Address, tenho acesso a todos os métodos, e não somente a um método
     public function getClassAddress():Address
     {
         return $this->addressClass;

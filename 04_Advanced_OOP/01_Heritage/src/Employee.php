@@ -7,16 +7,27 @@ class Employee extends Person
 {
     private string $bussPosition ;
 
-    public function __construct(string $name, CPF $cpf, string $bussPosition)
+    public function __construct(CPF $cpf, string $name, string $bussPosition)
     {
-        $this->validationName($name);
-        $this->name   = $name;
-        $this->cpf    = $cpf;
+        /*  CHAMANDO O CONSTRUTOR DA CLASSE BASE(CHAMADA DE parent PELO PHP) que se refere à classe mãe daquela que está fazendo a execução, 
+            O QUE NESSE CASO É A CLASSE PERSON */
+
+        /*  O construtor é um método utilizado para inicializar os atributos que um objeto de determinada classe terá. 
+            Ter uma classe base com um construtor significa que alguma coisa precisa ser inicializada, e, portanto, é interessante 
+            sempre chamarmos o construtor dela, mesmo que no PHP isso não seja obrigatório. Com isso evitamos duplicação de código 
+            e garantimos a consistência da nossa aplicação. */
+        parent::__construct($name, $cpf);
         $this->bussPosition = $bussPosition;
     }
 
     public function getBussPosition(): string
     {
         return $this->bussPosition;
+    }
+
+    public function changeName(string $name): void
+    {
+        $this->validationName($name);
+        $this->name   = $name;
     }
 }

@@ -1,10 +1,12 @@
 <?php
-namespace Alura\Bank\Model;
+namespace Alura\Bank\Model\Employee;
 
+use Alura\Bank\Model\Person;
+use Alura\Bank\Model\{CPF};
 // HERANÇA: https://blog.caelum.com.br/como-nao-aprender-orientacao-a-objetos-heranca/
 /* A ideia agora é fazermos com que nosso titular seja uma pessoa, ou seja, com que a classe Titular tenha tudo que Person tem, 
 com a adição do $endereco. Para isso, usaremos a palavra-chave extends, determinando que Titular estende aquilo que a classe Pessoa já definiu. */
-class Employee extends Person
+abstract class Employee extends Person
 {
     private string $bussPosition;
     private float $salary;
@@ -35,11 +37,27 @@ class Employee extends Person
         $this->name   = $name;
     }
 
+    public function increaseSalary(float $increaseValue):void
+    {
+        if($increaseValue<0){
+            echo "O valor do aumento deve ser positivo";
+            return;
+        }
+        $this->salary += $increaseValue;
+
+    }
+
     public function getSalary():float
     {
         return $this->salary;
     }
 
+
+    // Atualmente, apenas a classe Dev usa a bonificação padrão
+
+    /**
+     * ESSA FUNÇÃO DEVE SER public POIS, ELA É CHAMADA NA CLASSE DE SERVIÇO BonusController.php,
+     * E ESSA CLASSE NÃO EXTENDS A CLASSE Employee.php */
     public function salaryBonus():float
     {
         return $this->salary*0.1;

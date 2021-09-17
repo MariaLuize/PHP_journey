@@ -4,3 +4,4 @@
 * [Avançando com PHP](https://cursos.alura.com.br/course/php-arrays-strings-funcoes)
 * [Orientação a Objetos com PHP](https://cursos.alura.com.br/course/php-oo-classes-metodos-atributos)
 * [Avançando com Orientação a Objetos com PHP](https://cursos.alura.com.br/course/php-oo-heranca-polimorfirmo-interfaces)
+* [PHP Composer: Dependências, Autoload e Publicação](https://cursos.alura.com.br/course/php-composer)

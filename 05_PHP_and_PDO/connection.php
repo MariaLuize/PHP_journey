@@ -13,7 +13,10 @@
 */
 
 // __DIR__ indica o caminho atual
-$bankPath = __DIR__.'/bank.sqlite'; //Caminhoabsoluto para o bank(recomentado por https://www.php.net/manual/pt_BR/ref.pdo-sqlite.connection.php)
- $pdo = new PDO('sqlite:'.$bankPath);
+$databasePath = __DIR__.'/database.sqlite'; //Caminho absoluto para o bank(recomentado por https://www.php.net/manual/pt_BR/ref.pdo-sqlite.connection.php)
+$pdo = new PDO('sqlite:'.$databasePath);
 
 echo 'conectei';
+
+// https://www.php.net/manual/en/pdo.exec.php
+$pdo->exec('CREATE TABLE students(id INTEGER PRIMARY KEY, name TEXT, birth_date TEXT);');

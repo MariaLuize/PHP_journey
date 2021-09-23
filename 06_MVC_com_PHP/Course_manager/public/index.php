@@ -16,8 +16,25 @@ require  __DIR__.'/../vendor/autoload.php';
 // em PATH_INFO ("informação do caminho") temos exatamente a URL que está sendo acessada. Portanto, se passarmos 
 // uma URL http://localhost:8080/listar-cursos, o PATH_INFO será /listar-cursos.
 
-use Alura\Cursos\Controller\{ListarCursos,FormularioInsercaoCurso};
+use Alura\Cursos\Controller\{Interface_ControladorRequisicao};
 
+$routes = require __DIR__.'/../config/routes.php';
+$path   = $_SERVER['PATH_INFO'];
+
+// https://www.php.net/manual/en/function.array-key-exists.php
+if(!array_key_exists($path, $routes)){
+    http_response_code(404); //https://www.php.net/manual/en/function.http-response-code.php
+    die();
+}
+
+$classeControladora = $routes[$path];
+/** @var Interface_ControladorRequisicao $controlador */
+$controller         = new $classeControladora(); //De posse do nome da classe, podemos instanciá-la com new $classeControladora()
+$controller->processaRequisicao();
+
+
+// =============OLD WAY==================
+/*
 switch($_SERVER['PATH_INFO']){
     case '/listar-cursos': //página inicial
         $controller = new ListarCursos();
@@ -30,8 +47,15 @@ switch($_SERVER['PATH_INFO']){
         $controller->processaRequisicao();
         // require 'formulario-novo-curso.php';
         break;
+
+    case '/salvar-curso':
+        $controller = new Persistencia();
+        $controller->processaRequisicao();
+        // require 'formulario-novo-curso.php';
+        break;
     
     default :
         echo 'Error 404';
         break;
 }
+*/

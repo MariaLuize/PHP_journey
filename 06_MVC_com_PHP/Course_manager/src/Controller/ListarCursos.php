@@ -10,7 +10,7 @@ use \Alura\Cursos\Entity\Curso;
 class ListarCursos implements Interface_ControladorRequisicao
 {
 
-    private $repositorioDeCursos;
+    private \Doctrine\ORM\EntityManagerInterface $repositorioDeCursos;
 
     public function __construct()
     {

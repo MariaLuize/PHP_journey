@@ -1,5 +1,14 @@
 <?php
-// O ponto de entrada em nossa aplicação. 
+require  __DIR__.'/../vendor/autoload.php';
+
+/**
+ * Arquitetural MVC: 
+ * ->Model: Classes com a lógica de negócio e persistência
+ * ->View: Arquivos com o código HTML
+ * ->Controller: Classes que ligam o Model e View
+*/
+
+// O ponto de entrada em nossa aplicação é chamado de FrontController (ou de Dispatcher), e é o arquivo index.php 
 // Toda e qualquer requisição que chegar em nosso servidor passará pelo arquivo index.php.
 // Se na URL não foi especificado um arquivo, o servidor PHP automaticamente chamará o arquivo index.php;
 
@@ -7,13 +16,19 @@
 // em PATH_INFO ("informação do caminho") temos exatamente a URL que está sendo acessada. Portanto, se passarmos 
 // uma URL http://localhost:8080/listar-cursos, o PATH_INFO será /listar-cursos.
 
+use Alura\Cursos\Controller\{ListarCursos,FormularioInsercaoCurso};
+
 switch($_SERVER['PATH_INFO']){
-    case '/listar-cursos':
-        require 'listar-cursos.php';
+    case '/listar-cursos': //página inicial
+        $controller = new ListarCursos();
+        $controller->processaRequisicao();
+        // require 'listar-cursos.php';
         break;
     
     case '/novo-curso':
-        require 'formulario-novo-curso.php';
+        $controller = new FormularioInsercaoCurso();
+        $controller->processaRequisicao();
+        // require 'formulario-novo-curso.php';
         break;
     
     default :

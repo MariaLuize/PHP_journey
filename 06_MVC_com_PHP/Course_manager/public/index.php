@@ -28,7 +28,7 @@ if(!array_key_exists($path, $routes)){
 }
 
 $classeControladora = $routes[$path];
-/** @var Interface_ControladorRequisicao $controlador */
+//** @var Interface_ControladorRequisicao $controlador */
 $controller         = new $classeControladora(); //De posse do nome da classe, podemos instanciá-la com new $classeControladora()
 $controller->processaRequisicao();
 

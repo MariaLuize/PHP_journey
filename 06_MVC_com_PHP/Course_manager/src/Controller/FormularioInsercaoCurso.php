@@ -5,11 +5,14 @@ namespace Alura\Cursos\Controller;
 // Garantindo que todos os nossos controladores implementem uma interface em comum, expondo um método para 
 // processar a requisição, podemos fazer uso deles no front controller de forma semelhante.
 
-class FormularioInsercaoCurso implements Interface_ControladorRequisicao
+class FormularioInsercaoCurso  extends ControllerWHtml implements Interface_ControladorRequisicao
 {
     public function processaRequisicao() : void
     {
         $title = 'Cadastrar Novo Curso';
-        require __DIR__.'/../../view/cursos/formulario-curso.php';
+        echo $this->renderizaHtml('cursos/formulario-curso.php',[
+            'title'=> $title
+            
+        ]);
     }
 }

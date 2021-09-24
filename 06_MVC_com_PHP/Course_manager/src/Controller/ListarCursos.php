@@ -7,10 +7,10 @@ use \Alura\Cursos\Entity\Curso;
 // A class ListarCursos possui a lógica para acessar o banco de dados pelo Doctrine
 
 // Fizemos agora com que todos os nossos controladores de requisição implementem uma interface em comum, função processaRequisicao()
-class ListarCursos implements Interface_ControladorRequisicao
+class ListarCursos extends ControllerWHtml implements Interface_ControladorRequisicao
 {
 
-    private \Doctrine\ORM\EntityManagerInterface $repositorioDeCursos;
+    private array $repositorioDeCursos=[];
 
     public function __construct()
     {
@@ -27,6 +27,12 @@ class ListarCursos implements Interface_ControladorRequisicao
         $title = 'Listar os Cursos Cadastrados';
         // com o require, todos ar variáveis presentes na função processaRequisicao(), de ListarCursos.php 
         // tbm estarão em view-listar-cursos.php
-        require __DIR__.'/../../view/cursos/view-listar-cursos.php';
+        // require __DIR__.'/../../view/cursos/view-listar-cursos.php';
+
+        echo $this->renderizaHtml('cursos/view-listar-cursos.php',[
+            'cursos'=> $cursos,
+            'title'=> $title
+            
+        ]);
     }
 }

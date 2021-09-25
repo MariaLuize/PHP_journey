@@ -18,4 +18,6 @@ use App\Http\Controllers\SeriesController;
 //     return view('welcome');
 // });
 
-Route::get('/series', [SeriesController::class,'listSeries']);
+// Padrão de nome dos métodos: https://laravel.com/docs/8.x/controllers#resource-controllers
+Route::get('/series', [SeriesController::class,'index']);
+Route::get('/series/create', [SeriesController::class,'create']);

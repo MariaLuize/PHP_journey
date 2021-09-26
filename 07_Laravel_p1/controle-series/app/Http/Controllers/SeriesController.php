@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
+use App\Models\Serie;
 
 class SeriesController extends Controller
 {
@@ -13,22 +15,65 @@ class SeriesController extends Controller
         // var_dump($request->query()). '<br>'; //Retorna todos os dados da query string. Ex: http://127.0.0.1:8000/series?param=12345 printa só  array(1) { ["param"]=> string(5) "12345" }
         // echo $request->query('param'). '<br>'; //Retorna o valor de um parâmetro especifico presente na url.  Ex: http://127.0.0.1:8000/series?param=12345 printa só 12345
 
-        $series=[
-            "Doctor Who",
-            "Bojack Horseman",
-            "Community"
-        ];
+        // $series = Serie::all(); //busca todas as séries do banco
+        $series = Serie::query()->orderBy('name')->get(); // ordena as séries buscadas no banco pelo seu nome (em ordem crescente)
+        
+        // Menssagem sobre série que acabou de ser criada na área de criação de séries, tal info foi armazenada em uma section
+        $message = $request->session()->get(key: 'message');
+        $request->session()->remove('message');
         
         /** Direcionamento pra view correta. Com essa sintaxe, estamos indicando que ela deve procurar na pasta "Series" 
          * um arquivo chamado "index", sem que seja necessário informar a extensão. Na função view, podemos passar um segundo parâmetro
          * que envia todas as variáveis necessárias para o arquivo de view (index.php). Tal parâmetro pode ser passado em forma de um array associativo
          * tipo: ['series' => $series,]. Porém, a função PHP compact() permite que, caso o noma da variável no Controller e no árquivo de view seja o mesmo
          * podemos apenas declaras como: compact('series'), que é o equivalente de ['series' => $series,] */
-        return view('series.index',compact('series'));
+        return view('series.index',compact('series','message'));
     }
     
     public function create()
     {
         return view('series.create');
     }
-}
+
+    public function store(Request $request)
+    {
+
+        // preenche um objeto do tipo Serie com tudo o que vier do request, o que nesse caso é o name e a network
+        $serie = Serie::create($request->all());
+
+        // Acessa cada parâmetro enviado via request. Equivalente ao apresentado acima
+        // $name = $request->name;
+        // $network = $request->network;
+        // $serie = Serie::create([
+        //     'name' => $name,
+        //     'network' => $network,
+        // ]);
+
+        // Quardar informações referentes a série recem criada em uma session, e depois redirecionar
+        $request->session()
+            ->flash( // Uma Flash Message é uma mensagem na sessão HTTP, que durará apenas uma requisição, ou seja, será excluída da sessão na requisição seguinte.
+                'message',
+                "Série, identificada por {$serie->id}, criada: {$serie->name}"
+            );
+
+            return redirect()->route('series.index');
+        // $serie = new Serie();
+        // $serie->name = $name;
+        // $serie->network = $network;
+        // var_dump($serie->save());
+    }
+
+    public function destroy(Request $request)
+    {
+        $seriesName = Serie::find($request->id)->name;
+        Serie::destroy($request->id);
+        
+        $request->session()
+        ->flash( // Uma Flash Message é uma mensagem na sessão HTTP, que durará apenas uma requisição, ou seja, será excluída da sessão na requisição seguinte.
+            'message',
+            "Série {$seriesName} removida com sucesso"
+        );
+        
+        return redirect()->route('series.index');
+    }
+}   

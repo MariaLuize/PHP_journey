@@ -19,5 +19,7 @@ use App\Http\Controllers\SeriesController;
 // });
 
 // Padrão de nome dos métodos: https://laravel.com/docs/8.x/controllers#resource-controllers
-Route::get('/series', [SeriesController::class,'index']);
-Route::get('/series/create', [SeriesController::class,'create']);
+Route::get('/series', [SeriesController::class,'index'])->name('series.index');
+Route::get('/series/create', [SeriesController::class,'create'])->name("create_series");
+Route::post('/series/create', [SeriesController::class,'store']);
+Route::delete('/series/{id}', [SeriesController::class,'destroy']);

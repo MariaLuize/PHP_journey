@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Serie;
+use App\Http\Requests\SeriesFormRequest;
 
 class SeriesController extends Controller
 {
@@ -18,7 +19,7 @@ class SeriesController extends Controller
         // $series = Serie::all(); //busca todas as séries do banco
         $series = Serie::query()->orderBy('name')->get(); // ordena as séries buscadas no banco pelo seu nome (em ordem crescente)
         
-        // Menssagem sobre série que acabou de ser criada na área de criação de séries, tal info foi armazenada em uma section
+        // Mensagem sobre série que acabou de ser criada na área de criação de séries, tal info foi armazenada em uma section
         $message = $request->session()->get(key: 'message');
         $request->session()->remove('message');
         
@@ -28,6 +29,7 @@ class SeriesController extends Controller
          * tipo: ['series' => $series,]. Porém, a função PHP compact() permite que, caso o noma da variável no Controller e no árquivo de view seja o mesmo
          * podemos apenas declaras como: compact('series'), que é o equivalente de ['series' => $series,] */
         return view('series.index',compact('series','message'));
+        // return view('series.index',);
     }
     
     public function create()
@@ -35,8 +37,17 @@ class SeriesController extends Controller
         return view('series.create');
     }
 
-    public function store(Request $request)
+    public function store(SeriesFormRequest $request) // SeriesFormRequest referente as regras de validação para a inserção de séries no banco
     {
+
+        /** AGORA AS REGRAS DE VALIDAÇÃO ESTÃO NO ARQUIVO \app\Http\Requests\SeriesFormRequest.php */
+        // // Validação dos dados de entrada para o database
+        // $request->validate([
+        //     // Nome do campo que queremos validar => Regras de validação (nome fornecido pelo Laravel sepadado por "|")
+        //     // Regras de validação do Laravel: https://laravel.com/docs/8.x/validation#available-validation-rules
+        //     'name'      => 'required|min:3|unique:series',
+        //     // 'network'   => 'nullable',
+        // ]);
 
         // preenche um objeto do tipo Serie com tudo o que vier do request, o que nesse caso é o name e a network
         $serie = Serie::create($request->all());
@@ -57,10 +68,7 @@ class SeriesController extends Controller
             );
 
             return redirect()->route('series.index');
-        // $serie = new Serie();
-        // $serie->name = $name;
-        // $serie->network = $network;
-        // var_dump($serie->save());
+
     }
 
     public function destroy(Request $request)

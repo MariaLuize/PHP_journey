@@ -76,4 +76,21 @@ class SeriesController extends Controller
         
         return redirect()->route('series.index');
     }
+
+    public function update (int $id, Request $request)
+    {
+        $newName        = $request->name; // O campo name é referencite ao campo de mesmo nome presente no FormData enviado ( formData.append('name', nameSerie))
+        $newNetwork     = $request->network;
+        // $serie          = Serie::find($request->id);
+
+        /**
+         * No nosso Controller, estamos buscando o id a partir da requisição. Porém, se já estamos 
+         * definindo um atributo na rota, podemos pegá-lo diretamente com um parâmetro do método, 
+         * bastando definirmos como nome dessa parâmetro o mesmo nome que figura na rota.
+         */
+        $serie          = Serie::find($id);
+        $serie->name    = $newName;
+        $serie->network = $newNetwork;
+        $serie->save(); // Método para salvar modificações em um registro no DB
+    }
 }   

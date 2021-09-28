@@ -10,7 +10,7 @@ class SeriesCreator
     public function createSerie(string $seriesName, string $seriesNetwork, int $qtySeasons, int $qtyEpisodes):Serie
     {
         $serie = null;
-        DB::beginTransaction(); //Inicil de uma transação
+        DB::beginTransaction(); //Inicio de uma transação
         $serie = Serie::create([
             'name'    => $seriesName,
             'network' => $seriesNetwork,

@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{SeriesController, SeasonsController, EpisodesController};
+use App\Http\Controllers\{SeriesController, SeasonsController, EpisodesController, LoginController, RegistryController};
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,21 @@ Route::delete('/series/{id}', [SeriesController::class,'destroy']);
 
 Route::post('/series/{id}/editName', [SeriesController::class,'update']);
 
-// Seasons
-Route::get('/series/{serieId}/seasons', [SeasonsController::class,'index']);
+// Seasons and Episodes
+Route::get('/series/{serieId}/seasons', [SeasonsController::class,'index'])->name('seasons.index');;
 Route::get('/seasons/{seasonId}/episodes', [EpisodesController::class,'index']);
+Route::post('/seasons/{seasonId}/episodes/watch', [EpisodesController::class,'watch']);
+
+// Login
+Route::get('/login', [LoginController::class,'index']);
+Route::post('/login', [LoginController::class,'login']);
+
+// Registry
+Route::get('/registry', [RegistryController::class,'create']);
+Route::post('/registry', [RegistryController::class,'store']);
+
+// Logout
+Route::get('/logout', function(){
+    Auth::logout();
+    return redirect('/login');
+});

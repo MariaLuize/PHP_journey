@@ -8,6 +8,12 @@ use App\Services\{SeriesCreator, SeriesRemover};
 
 class SeriesController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     // Padrão de nome dos métodos: https://laravel.com/docs/8.x/controllers#resource-controllers
     public function index(Request $request)
     {

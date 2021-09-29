@@ -5,12 +5,8 @@ Melhores Séries
 @endsection
 
 @section('content')
-@if(!empty($message))
-    <div class="alert alert-success">
-        {{$message}}    
-    </div>
-@endif
 
+@include('message-alert',['message'=>$message])
 
 <a href="{{route('create_series')}}" class="btn btn-info mb-2">Adicionar Série</a>
 <ul class="list-group">

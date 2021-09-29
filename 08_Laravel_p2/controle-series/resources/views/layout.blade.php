@@ -11,6 +11,10 @@
 </head>  
 <body>
     <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2 d-flex justify-content-between">
+            <a class="navbar-brand" href="{{route('series.index')}}">Home</a>
+            <a href="/logout" class='text-danger'>Sair</a>
+        </nav>
         <div class="jumbotron">
             <h1 class="display-4">@yield('header')</h1>
         </div>

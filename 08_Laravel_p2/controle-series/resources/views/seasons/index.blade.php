@@ -15,7 +15,7 @@ Temporadas de
             <span class="badge badge-pill badge-light">
             <!-- $season->episodes->count(), episodes é uma colação do Eloquent, que contem vários episodes, o count() conta o conteúdo quantitativo presente na coleção episodes -->
             <!-- https://laravel.com/docs/8.x/collections     -->
-                {{$season->episodes->count()}}
+                0 / {{$season->episodes->count()}}
             </span>
         </li>
      @endforeach

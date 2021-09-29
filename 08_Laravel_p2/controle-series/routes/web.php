@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SeriesController;
-use App\Http\Controllers\SeasonsController;
+use App\Http\Controllers\{SeriesController, SeasonsController, EpisodesController};
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +28,4 @@ Route::post('/series/{id}/editName', [SeriesController::class,'update']);
 
 // Seasons
 Route::get('/series/{serieId}/seasons', [SeasonsController::class,'index']);
-Route::get('/season/{seasonId}/episodes', [EpisodesController::class,'index']);
+Route::get('/seasons/{seasonId}/episodes', [EpisodesController::class,'index']);

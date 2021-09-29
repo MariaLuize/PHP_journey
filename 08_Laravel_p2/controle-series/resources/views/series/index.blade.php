@@ -8,7 +8,10 @@ Melhores Séries
 
 @include('message-alert',['message'=>$message])
 
+@auth
 <a href="{{route('create_series')}}" class="btn btn-info mb-2">Adicionar Série</a>
+@endauth
+
 <ul class="list-group">
     @foreach( $series as $serie)
         <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -17,7 +20,7 @@ Melhores Séries
                 <input type="text" class="form-control" id="name" value="{{ $serie->name }}">
                 <input type="text" class="form-control" id="network" value="{{ $serie->network }}">
                 <div class="input-group-append">
-                    <button class="btn btn-primary" onclick="editSerie({{ $serie->id}})">
+                    <button class="btn btn-outline-primary" onclick="editSerie({{ $serie->id}})">
                         <i class="fas fa-check"></i>
                     </button>
                     @csrf
@@ -26,14 +29,19 @@ Melhores Séries
 
 
             <span class=d-flex>
-            <button class="btn btn-outline-info btn-sm mr-2" onclick="toggleInput({{$serie->id}})">
-                <i class="fas fa-edit"></i>    
-            </button>
+
+                @auth
+                <button class="btn btn-outline-info btn-sm mr-2" onclick="toggleInput({{$serie->id}})">
+                    <i class="fas fa-edit"></i>    
+                </button>
+                @endauth
+                
                 <!-- Visualizar as temporadas da série -->
                 <a href="/series/{{$serie->id}}/seasons" class="btn btn-outline-info btn-sm mr-2">
                     <i class="fas fa-external-link-alt"></i>
                 </a>
 
+                @auth
                 <!-- ddslashes() para evitar conflitos com nomes de séries que incluam o caractere ': -->
                 <form action="/series/{{$serie->id}}" method="post"
                 onsubmit="return confirm('Certeza que quer remover a série {{addslashes($serie->name)}}?')">
@@ -43,6 +51,7 @@ Melhores Séries
                 @method('DELETE')
                 <button class="btn btn-outline-danger btn-sm"><i class="far fa-trash-alt"></i></button>
                 </form>
+                @endauth
             </span>
         </li>
      @endforeach

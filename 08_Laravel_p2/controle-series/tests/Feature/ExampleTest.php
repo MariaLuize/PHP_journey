@@ -9,6 +9,9 @@ class ExampleTest extends TestCase
 {
     /**
      * A basic test example.
+     * Está verificando se existe uma rota / na nossa aplicação. Porém, nossa rota principal é /series, 
+     * e não criamos uma rota /. Portanto, para que esse teste não retorne um erro, ou alteramos a URL verificada para /, 
+     * ou mudamos o status que deve ser retornado para 404:
      *
      * @return void
      */
@@ -16,6 +19,6 @@ class ExampleTest extends TestCase
     {
         $response = $this->get('/');
 
-        $response->assertStatus(200);
+        $response->assertStatus(404);
     }
 }

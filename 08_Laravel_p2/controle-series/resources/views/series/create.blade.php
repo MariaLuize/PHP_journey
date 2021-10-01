@@ -6,7 +6,7 @@ Adicionar Série
 
 @section('content')
 
-@include('errors', ['errors' => $errors]);
+@include('errors', ['errors' => $errors])
 
 <form method="POST">
     @csrf

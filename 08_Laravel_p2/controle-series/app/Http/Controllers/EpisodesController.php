@@ -31,7 +31,11 @@ class EpisodesController extends Controller
              * Para cada episódios da temporada em questão, somente os episódios cujo id estiverem no array
              * $watchedEpisodes serão marcados com seu atributo watched para true, os que não estiverem no array
              * recebem o valor default, configurado na migration AddWatchedField, ao qual é false */
-            $episode->watched = in_array( $episode->id, $watchedEpisodes);
+            if (!empty($watchedEpisodes)){
+                $episode->watched = in_array( $episode->id, $watchedEpisodes);
+            }else{ // Para o caso de ser emviado uma requisição em que todos os episódios foram desmarcados
+                 $episode->watched = false;
+            }
         });
         $currentSeason->push(); // Esse comando sinaliza $currentSeason enviar e salvar todas as suas modificações no DB
         

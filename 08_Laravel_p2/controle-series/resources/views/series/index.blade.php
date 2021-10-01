@@ -9,7 +9,7 @@ Melhores Séries
 @include('message-alert',['message'=>$message])
 
 @auth
-<a href="{{route('create_series')}}" class="btn btn-info mb-2">Adicionar Série</a>
+<a href="{{route('create_series')}}" class="btn btn-outline-info mb-2">Adicionar Série</a>
 @endauth
 
 <ul class="list-group">

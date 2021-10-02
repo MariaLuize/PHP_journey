@@ -17,12 +17,9 @@ class CreateEpisodesTable extends Migration
             $table->id();
             // $table->timestamps();
             $table->integer('number'); //número do episódio
-            $table->integer('season_id'); //referencia pro id da temporada 
 
-            // Chave estrangeira
-            $table->foreign('season_id') // referência season_id é uma chave estrangeira
-                ->references('id') // Que referencia o campo id
-                ->on('seasons'); //presente na classe(tabela) Seasons
+            // Chave estrangeira:  https://laravel.com/docs/8.x/migrations#foreign-key-constraints
+            $table->foreignId('season_id')->constrained('seasons');
         });
     }
 

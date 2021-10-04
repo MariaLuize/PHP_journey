@@ -16,6 +16,7 @@ Melhores Séries
     @foreach( $series as $serie)
         <li class="list-group-item d-flex justify-content-between align-items-center">
             <span id="name-info-serie-{{$serie->id}}">{{$serie->name;}} - {{$serie->network;}}</span>
+            
             <div class="input-group w-50" hidden id="input-name-info-serie-{{ $serie->id }}">
                 <input type="text" class="form-control" id="name" value="{{ $serie->name }}">
                 <input type="text" class="form-control" id="network" value="{{ $serie->network }}">
